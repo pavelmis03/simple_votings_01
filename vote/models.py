@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+#-------------------------------------------------#
+# Обязательно к ознакомлению:                     #
+# https://dbdiagram.io/d/5e0b5b31edf08a25543f8603 #
+#-------------------------------------------------#
+
 class Constants:
     # КОНСТАНТЫ
     COMPLAINTS_TITLE_SIZE = 100
@@ -12,6 +17,7 @@ class Constants:
     )
     POSTS_TITLE_SIZE = 100
     POSTS_DESC_SIZE = 500
+    ANSWERS_TEXT_SIZE = 500
 
 
 class Complaints(models.Model):
@@ -31,3 +37,15 @@ class Posts(models.Model):
     title = models.CharField(max_length=Constants.POSTS_TITLE_SIZE)
     description = models.CharField(max_length=Constants.POSTS_DESC_SIZE)
     created_at = models.DateTimeField()
+
+
+class Answers(models.Model):
+    # ВОЗМОЖНЫЕ ОТВЕТЫ
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE)
+    text = models.CharField(max_length=Constants.ANSWERS_TEXT_SIZE)
+
+class Votes(models.Model):
+    # ГОЛОСА
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answers, on_delete=models.CASCADE)
+    date = models.DateTimeField()
