@@ -22,7 +22,7 @@ class Constants:
 
 class Complaints(models.Model):
     # ЖАЛОБЫ
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=Constants.COMPLAINTS_STATUS)
     title = models.CharField(max_length=Constants.COMPLAINTS_TITLE_SIZE)
     text = models.CharField(max_length=Constants.COMPLAINTS_TEXT_SIZE)
@@ -31,7 +31,7 @@ class Complaints(models.Model):
 
 class Posts(models.Model):
     # ПОСТЫ
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     # only one - true, several choices - false
     type = models.BooleanField()
     title = models.CharField(max_length=Constants.POSTS_TITLE_SIZE)
@@ -46,6 +46,6 @@ class Answers(models.Model):
 
 class Votes(models.Model):
     # ГОЛОСА
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answers, on_delete=models.CASCADE)
     date = models.DateTimeField()
