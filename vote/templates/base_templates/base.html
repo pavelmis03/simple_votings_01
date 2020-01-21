@@ -10,10 +10,17 @@
         <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.css' %}">
         <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.min.css' %}">
         <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
+
+        #bootstrap
+        <link rel="stylesheet" crossorigin="anonymous"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh">
+        <link rel="stylesheet"
+              href="https://getbootstrap.com/docs/4.4/examples/sticky-footer-navbar/sticky-footer-navbar.css">
     </head>
 
     <body>
-        {% include "../navigation/menu.html" %}
+        {% include "../navigation/menu_main.html" %}
 
         {% block content %}
         {% endblock %}

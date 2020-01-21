@@ -1,5 +1,31 @@
+<div style="margin-top: 5%;">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">Voting box</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-{% for item in MenuForm %}
-<a href="{{ item.link }}">{{ item.text }}</a>&nbsp;|
-{% endfor %}
-<hr>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto" style="width: 100%;">
+                {% for item in MenuMain %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ item.punct_link }}">{{ item.punct_text }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <form action="/menu_main/" method="POST" class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for People or Polls" aria-label="Search">
+            </form>
+            <ul class="navbar-nav mr-auto" style="margin-right: -5%">
+                {% for item in MenuMainAnon %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ item.punct_link }}">{{ item.punct_text }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <hr>
+    </nav>
+</div>
