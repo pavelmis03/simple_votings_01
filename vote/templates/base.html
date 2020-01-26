@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ title }}</title>
-        <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}">
-        <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}">
-        <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.css' %}">
-        <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.min.css' %}">
-        <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
-    </head>
 
-    <body>
-        {% include "menu.html" %}
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}">
+    <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
+</head>
 
-        {% block content %}
-        {% endblock %}
-        <script src="{% static 'uikit/js/uikit.js' %}"></script>
-        <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
-        <script src="{% static 'uikit/js/uikit-icons.js' %}"></script>
-        <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
-    </body>
+<body>
+    <div class="header">
+        <div class="logo_h">
+            <img src="/static/icons/50x50/logo_big.png" alt="">
+            <h1 class="Logo_text"><strong><i>Voting box</i></strong></h1>
+        </div>
+        <div class="set">
+            <img src="/static/icons/20x20/notifications_status1.png" alt="">
+            <img src="/static/icons/20x20/settings.png" alt="">
+        </div>
+    </div>
+    <script src="{% static 'uikit/js/uikit.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit-icons.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
+</body>
+
 </html>
