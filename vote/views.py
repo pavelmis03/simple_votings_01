@@ -9,15 +9,16 @@ from vote.forms import LoginForm
 
 
 def get_base_context(request, pagename=''):
-    context = {'MenuMain': [
-        {'punct_link': '/', 'punct_text': 'Nahui'},
-    ], 'current_time': datetime.now(), 'MenuMainAnon': [],
-        'pagename': pagename}
+    context = {'MenuMain': [], 'current_time': datetime.now(), 'MenuMainAnon': [], 'pagename': pagename}
+
     if request.user.is_anonymous:
         context['MenuMainAnon'].append({'punct_link': '/login', 'punct_text': 'LogIn'})
         context['MenuMainAnon'].append({'punct_link': '/registration', 'punct_text': 'Register'})
     else:
-        context['MenuMainAnon'].append({'punct_link': '/logout', 'punct_text': 'LogOut'})
+        context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'Add new voting'}]
+        context['MenuMainAnon'] += [{'punct_link': '/logout', 'punct_text': 'LogOut'}]
+
+    context['MenuMain'] += [{'punct_link': '/popular', 'punct_text': 'Posts'}]
     return context
 
 
