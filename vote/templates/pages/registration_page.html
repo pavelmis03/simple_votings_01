@@ -2,7 +2,7 @@
 
 {% block content %}
 <div align="center">
-<form action="{% url 'registration' %}" method="POST" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top" >
+<form action="{% url 'registration' %}" method="POST" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top" >
     {% csrf_token %}
     <div class="uk-card-header">
         <div class="container uk-crad-header"><h2 align="center">Registration page</h2></div>
@@ -10,17 +10,24 @@
 
     <div class="uk-card-body">
         <div class="uk-margin">
-        <legend align="left" class="uk-legend">Username</legend>
+        <span align="left" class="uk-legend">Username</span>
             {{ form.username }}
         </div>
 
         <div class="uk-margin">
-        <legend align="left" class="uk-legend">Password</legend>
+        <span align="left" class="uk-legend">Password</span>
             {{ form.password1 }}
         </div>
 
+        <ul align="center" class="uk-list ">
+            <li>Your password can't be too similar to your other personal information.</li>
+            <li>Your password must constains at least 8 characters.</li>
+            <li>Your password can't be a commonly used password.</li>
+            <li>Your password can't be entirely numeric.</li>
+        </ul>
+
         <div class="uk-margin">
-        <legend align="left" class="uk-legend">Repeat Password</legend>
+        <span align="left" class="uk-legend">Repeat Password</span>
             {{ form.password2 }}
         </div>
 

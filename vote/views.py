@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib import messages, auth
 from django.contrib.auth import *
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import render, redirect
 
 from vote.forms import LoginForm
@@ -16,7 +16,7 @@ def get_base_context(request, pagename=''):
         context['MenuMainAnon'].append({'punct_link': '/registration', 'punct_text': 'Register'})
     else:
         context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'Add new voting'}]
-        context['MenuMainAnon'] += [{'punct_link': '/logout', 'punct_text': 'LogOut'}]
+        context['MenuMainAnon'] += [{'punct_link': '/profile', 'punct_text': 'Profile'}]
 
     context['MenuMain'] += [{'punct_link': '/popular', 'punct_text': 'Posts'}]
     return context
@@ -66,13 +66,28 @@ def registration_page(request):
             return redirect('/')
         else:
             context['form'] = register_form
-            for mess in register_form.error_messages:
-                messages.add_message(request, messages.ERROR, mess)
-            if not register_form.error_messages:
-                messages.add_message(request, messages.ERROR, 'Incorrect registration data!')
+            messages.add_message(request, messages.ERROR, 'Incorrect registration data!')
             return redirect('registration')
 
     return render(request, 'pages/registration_page.html', context)
+
+
+def change_password(request):
+    context = get_base_context(request, '')
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "The password change is successful!")
+            return redirect('/')
+        else:
+            messages.add_message(request, messages.ERROR, "Incorrectly passwords data!")
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context['form'] = form
+    return render(request, 'pages/change_password.html', context)
 
 
 def logout(request):
