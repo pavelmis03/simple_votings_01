@@ -1,0 +1,27 @@
+{% extends "base_templates/base.html" %}
+
+{% block content %}
+<div align="center">
+<form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top" >
+    {% csrf_token %}
+    <div class="uk-card-header">
+        <div class="container uk-crad-header"><h2 align="center">LogIn</h2></div>
+    </div>
+    <fieldset class="uk-fieldset">
+
+
+        <div class="uk-margin">
+        <legend align="left" class="uk-legend">Username</legend>
+            {{ form.username }}
+        </div>
+
+        <div class="uk-margin">
+        <legend align="left" class="uk-legend">Password</legend>
+            {{ form.password }}
+        </div>
+
+            <input class="uk-button uk-button-primary" type="submit" value="LogIn">
+    </fieldset>
+</form>
+</div>
+{% endblock %}

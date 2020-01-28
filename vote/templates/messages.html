@@ -1,0 +1,9 @@
+{% if messages %}
+    {% for message in messages %}
+
+    <div class="uk-alert-{{ message.tags }} uk-animation-slide-left" uk-alert>
+        <p align="center">{{ message }}<a align="right" class="uk-alert-close" uk-close></a></p>
+
+    </div>
+    {% endfor %}
+{% endif %}
