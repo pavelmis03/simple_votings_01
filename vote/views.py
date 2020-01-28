@@ -77,3 +77,16 @@ def registration_page(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+def error_404(request, ex):
+    context = {'exception': ''}
+    try:
+        context['exception'] = ex.args[0]
+    except (AttributeError, IndexError):
+        pass
+    return render(request, 'error_pages/error_404.html', context)
+
+
+def error_500(request):
+    return render(request, 'error_pages/error_500.html', {})

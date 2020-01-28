@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import handler404, handler500
 
 from vote import views
 
@@ -25,3 +26,7 @@ urlpatterns = [
     path('login/', views.login_page, name='login'),
     path('logout/', views.logout, name='logout')
 ]
+
+
+handler404 = views.error_404
+handler500 = views.error_500

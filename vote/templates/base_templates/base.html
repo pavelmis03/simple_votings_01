@@ -4,16 +4,16 @@
     <head>
         <meta charset="UTF-8">
         <title>{{ title }}</title>
+        <base href="/">
+        <!-- ============================== BASE CSS STYLE ============================== -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-        <link rel="stylesheet" href="{% static 'web/css/stytle.css' %}">
+        <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
         <link rel="stylesheet" href="{% static 'web/css/style_menus.css' %}">
-        <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
         <link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}">
         <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}">
         <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.css' %}">
         <link rel="stylesheet" href="{% static 'uikit/css/uikit-rtl.min.css' %}">
-        <link rel="stylesheet" href="{% static '/web/css/style.css' %}">
 
         <link rel="stylesheet" crossorigin="anonymous"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -24,12 +24,14 @@
 
     <body class="d-flex flex-column ">
 
+    <!-- ============================== HEADER ============================== -->
     <header>
         {% block header %}
         {% include "../navigation/menu_main.html" %}
         {% endblock %}
     </header>
 
+    <!-- ============================== BODY ============================== -->
     <main role="main">
         <div class="container">
             {% include 'messages.html' %}
@@ -39,12 +41,14 @@
         </div>
     </main>
 
+    <!-- ============================== FOOTER ============================== -->
     <footer class="mt-auto">
         {% block footer %}
         {% include 'footer.html' %}
         {% endblock %}
     </footer>
 
+    <!-- ============================== BASE JAVASCRIPT STYLE ============================== -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <script src="{% static 'uikit/js/uikit.js' %}"></script>
