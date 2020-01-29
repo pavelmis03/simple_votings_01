@@ -18,8 +18,16 @@ def get_base_context(request, pagename=''):
         context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'Add new voting'}]
         context['MenuMainAnon'] += [{'punct_link': '/profile', 'punct_text': 'Profile'}]
 
-    context['MenuMain'] += [{'punct_link': '/popular', 'punct_text': 'Posts'}]
     return context
+
+
+def add_new_voting(request):
+    context = get_base_context(request, '')
+    return render(request, 'pages/add_new_voting.html', context)
+
+def votes(request):
+    context = get_base_context(request, '')
+    return render(request, 'pages/votes.html', context)
 
 
 def index_page(request):
