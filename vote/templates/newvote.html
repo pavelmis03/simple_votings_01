@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{main_header}}</h1>
+<form action="/newvote/" method="post">
+  {% csrf_token %}
+  <div class="col" style="margin: 10px">
+      {{form.title_of_question.label}}: {{form.title_of_question}}
+  </div>
+  <div class="col" style="margin: 10px">
+    {{form.first_variant.label}}: {{form.first_variant}}
+  </div>
+  <div class="col" style="margin: 10px">
+    {{form.second_variant.label}}: {{form.second_variant}}
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="margin: 10px 20px">Создать</button>
+</form>
+{% endblock %}

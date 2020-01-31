@@ -20,5 +20,6 @@ from vote import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_page)
+    path('', views.index_page),
+    path('newvote/', views.newvote),
 ]
