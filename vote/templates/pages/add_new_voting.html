@@ -5,41 +5,75 @@
     {% csrf_token %}
     <br class="uk-fieldset">
     <div class="uk-card-header">
-        <legend align="center">Adding a new vote</legend>
+        <legend align="center">Создайте ваш vote</legend>
     </div>
 
     <div class="uk-card-body">
         <div class="uk-margin">
-            <span class="uk-legend uk-text-middle">The topic for voting</span>
-            <input class="uk-input" type="text" placeholder="Title">
+            <span class="uk-legend uk-text-middle">Ваш вопрос</span>
+            <input class="uk-input" type="text" placeholder="...">
         </div>
 
         <div class="uk-margin">
-            <span class="uk-legend uk-text-middle">Answer choices</span>
+            <span class="uk-legend uk-text-middle">Введите варианты ответа</span>
+            <div class="" id="Pols">
+                <!--
+                <div class="uk-flex">
+                    <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
+                    <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
+                </div>
 
-            <div class="uk-flex">
-                <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
-                <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
+                <div class="uk-flex">
+                    <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
+                    <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
+                </div>
+-->
             </div>
+            <div class="uk-button uk-button-default" id="AddVoteP">Добавить пункт</div>
 
-            <div class="uk-flex">
-                <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
-                <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
-            </div>
-
-            <div class="uk-flex">
-                <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
-                <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
-            </div>
-
-            <input class="uk-input" type="text" placeholder="Add new choice" style="margin-bottom:1.3em">
         </div>
 
-        <input type="checkbox" class="uk-checkbox">   Selecting multiple options<br>
+        <input type="checkbox" class="uk-checkbox"> Много вариантный режим<br>
 
-        <input class="uk-button uk-button-primary" type="submit" value="Post voteing" style="margin-top:2em">
+        <input class="uk-button uk-button-primary" type="submit" value="Опубликовать vote" style="margin-top:2em">
     </div>
-    </fieldset>
+</form>
 
-    </form>
+
+<script>
+    'use strict';
+
+    //document.querySelectorAll('.uk-close').addEventListener
+    AddVoteP.addEventListener('click', function() {
+        let newP = document.createElement('div');
+        newP.classList.add('uk-flex');
+        let newI = document.createElement('input');
+        newI.classList.add('uk-input');
+        newI.setAttribute('type', 'text');
+        newI.setAttribute('style', 'margin-bottom:1.3em;margin-right:0.3em');
+        let newCl = document.createElement('a');
+        newCl.classList.add('uk-button');
+        newCl.classList.add('uk-button-default');
+        newCl.classList.add('uk-close');
+        newCl.classList.add('uk-height-1-1');
+        newCl.setAttribute('uk-close', '');
+        newCl.addEventListener('click', function(e) {
+            let a = e.target.parentNode;
+            a.innerHTML = "";
+            let d = Pols.childList;
+            for (i in d) {
+                if (i.innerHTML == "") {
+                    d.splice(i, 1);
+                }
+            }
+            Pols.childList = d;
+        });
+        newP.appendChild(newI);
+        newP.appendChild(newCl);
+
+        // Pols.insertAdjacentHTML("afterEnd", newP);
+        Pols.appendChild(newP);
+    });
+
+</script>
 {% endblock %}
