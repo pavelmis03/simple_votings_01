@@ -25,6 +25,7 @@ def add_new_voting(request):
     context = get_base_context(request, '')
     return render(request, 'pages/add_new_voting.html', context)
 
+
 def votes(request):
     context = get_base_context(request, '')
     return render(request, 'pages/votes.html', context)

@@ -3,35 +3,43 @@
 {% block content %}
 <form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top">
     {% csrf_token %}
-    <fieldset class="uk-fieldset">
+    <br class="uk-fieldset">
+    <div class="uk-card-header">
+        <legend align="center">Adding a new vote</legend>
+    </div>
 
-        <legend class="uk-legend">New voting</legend>
-
+    <div class="uk-card-body">
         <div class="uk-margin">
+            <span class="uk-legend uk-text-middle">The topic for voting</span>
             <input class="uk-input" type="text" placeholder="Title">
         </div>
 
         <div class="uk-margin">
-            <textarea class="uk-textarea" rows="5" placeholder="Ты, да, да, именно ты должен дописать эту форму, это вовсе не рабочая страница, это костыль который ТЫ ДОЛЖЕН ДОВЕСТИ ДО УМА"></textarea>
+            <span class="uk-legend uk-text-middle">Answer choices</span>
+
+            <div class="uk-flex">
+                <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
+                <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
+            </div>
+
+            <div class="uk-flex">
+                <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
+                <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
+            </div>
+
+            <div class="uk-flex">
+                <input class="uk-input" type="text" style="margin-bottom:1.3em;margin-right:0.3em">
+                <a class="uk-button uk-button-default uk-close uk-height-1-1" uk-close></a>
+            </div>
+
+            <input class="uk-input" type="text" placeholder="Add new choice" style="margin-bottom:1.3em">
         </div>
 
-        <div class="uk-margin">
-            <span class="uk-text-middle">Voting type</span>
-            <select class="uk-select">
-                <option>Type1</option>
-                <option>Type2</option>
-                <option>Type3</option>
-            </select>
-        </div>
+        <input type="checkbox" class="uk-checkbox">   Selecting multiple options<br>
 
-        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-            <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
-            <label><input class="uk-radio" type="radio" name="radio2"> B</label>
-        <button class="uk-button uk-button-primary" type="submit">Add option</button>
-        </div>
-
-        <input class="uk-button uk-button-primary" type="submit" value="Post voteing">
-
+        <input class="uk-button uk-button-primary" type="submit" value="Post voteing" style="margin-top:2em">
+    </div>
     </fieldset>
-</form>
+
+    </form>
 {% endblock %}
