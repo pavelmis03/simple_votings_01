@@ -12,10 +12,10 @@ def get_base_context(request, pagename=''):
     context = {'MenuMain': [], 'current_time': datetime.now(), 'MenuMainAnon': [], 'pagename': pagename}
 
     if request.user.is_anonymous:
-        context['MenuMainAnon'].append({'punct_link': '/login', 'punct_text': 'LogIn'})
-        context['MenuMainAnon'].append({'punct_link': '/registration', 'punct_text': 'Register'})
+        context['MenuMainAnon'].append({'punct_link': '/login', 'punct_text': 'SingIn'})
+        context['MenuMainAnon'].append({'punct_link': '/registration', 'punct_text': 'Зарегистрироваться'})
     else:
-        context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'Add new voting'}]
+        context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'Создать vote'}]
         context['MenuMainAnon'] += [{'punct_link': '/profile', 'punct_text': 'Profile'}]
 
     return context
@@ -34,51 +34,43 @@ def votes(request):
 def index_page(request):
     context = get_base_context(request, 'Simple votings')
     context['main_header'] = context['title'] = 'Simple votings'
-    return render(request, 'pages/index.html', context)
-
-
-def login_page(request):
-    context = get_base_context(request, '')
     context['form'] = LoginForm()
-    if request.method == 'POST':
-        loginform = LoginForm(request.POST)
-        if loginform.is_valid():
-            username = loginform.data['username']
-            password = loginform.data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.add_message(request, messages.SUCCESS, "Authentication is successful!")
-                return redirect('/')
-            else:
-                messages.add_message(request, messages.ERROR, "Incorrect username or password!")
-        else:
-            messages.add_message(request, messages.ERROR, "Incorrect authorization data!")
-        return redirect('login')
-    return render(request, 'pages/login_page.html', context)
-
-
-def registration_page(request):
-    context = get_base_context(request, '')
-    context['form'] = UserCreationForm()
+    context['form1'] = UserCreationForm()
     if request.POST:
         register_form = UserCreationForm(request.POST)
+        loginform = LoginForm(request.POST)
         if register_form.is_valid():
             register_form.save()
             # Get data
             _username = register_form.cleaned_data['username']
             _password = register_form.cleaned_data['password2']
-
             # Result
             newuser = authenticate(username=_username, password=_password)
             login(request, newuser)
+            messages.add_message(request, messages.SUCCESS, "Вы успешно зарегистрировались и авторизовались!")
             return redirect('/')
         else:
-            context['form'] = register_form
-            messages.add_message(request, messages.ERROR, 'Incorrect registration data!')
-            return redirect('registration')
+            context['form1'] = register_form
+            if loginform.is_valid():
+                username = loginform.data['username']
+                password = loginform.data['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.add_message(request, messages.SUCCESS, "Вы успешно вошли!")
+                    return redirect('/')
+            else:
+                messages.add_message(request, messages.ERROR, 'переданные данные не корректны!')
+                return redirect('/')
 
-    return render(request, 'pages/registration_page.html', context)
+    return render(request, 'pages/index.html', context)
+
+
+def login_page(request):
+    pass
+
+def registration_page(request):
+    pass
 
 
 def change_password(request):

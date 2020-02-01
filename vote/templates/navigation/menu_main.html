@@ -1,37 +1,106 @@
 <div class="wrapper">
     {% include "navigation/menu_drop.html" %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" uk-navbar>
-    <div class="uk-navbar-left">
+        <div class="uk-navbar-left">
 
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <img src="../../../static/icons/32x32/logo.png">
             </button>
             <a class="navbar-brand" style="padding: 10px;" href="/">Voting box</a>
 
-        <ul class="uk-navbar-nav">
-            <li class="nav-item active">
+            <ul class="uk-navbar-nav">
+                <li class="nav-item active">
                     {% for item in MenuMain %}
-                            <button class="uk-button uk-button-light" href="{{ item.punct_link }}"
-                            onClick='location.href="{{ item.punct_link }}"'>{{ item.punct_text }}</button>
+                    <button class="uk-button uk-button-light" href="{{ item.punct_link }}" onClick='location.href="{{ item.punct_link }}"'>{{ item.punct_text }}</button>
                     {% endfor %}
-            </li>
-        </ul>
+                </li>
+            </ul>
 
-    </div>
-    <div class="uk-navbar-right">
-        <input class="uk-input uk-form-width-small" type="text" placeholder="Search">
+        </div>
+        <div class="uk-navbar-right">
+            <input class="uk-input uk-form-width-small" type="text" placeholder="Search">
             <li class="nav-item active">
                 {% for item in MenuMainAnon %}
-                        {% if item.punct_link == '/profile' %}
-                        <button class="uk-button uk-button-primary">{{ item.punct_text }}</button>
-                        {% include "navigation/profile.html" %}
-                        {% else %}
-                        <button class="uk-button uk-button-primary"
-                                onClick='location.href="{{ item.punct_link }}"'>{{ item.punct_text }}</button>
-                        {% endif %}
+                {% if item.punct_link == '/profile' %}
+                <button class="uk-button uk-button-primary">{{ item.punct_text }}</button>
+                {% include "navigation/profile.html" %}
+                {% else %}
+                <button class="uk-button uk-button-primary" uk-toggle="target: #{{ item.punct_text }}">{{ item.punct_text }}</button>
+                {% if item.punct_text == 'SingIn' %}
+                <div align="center" id="{{ item.punct_text }}" uk-modal>
+                    <form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
+                        {% csrf_token %}
+                        <div class="uk-card-header">
+                            <!--                            <button class="uk-modal-close-default" align="rigth" type="button" uk-close></button>-->
+                            <div class="container uk-crad-header">
+                                <h2 align="center">Войти</h2>
+                            </div>
+                        </div>
+                        <fieldset class="uk-fieldset">
+
+                            <div class="uk-modal-footer uk-text-left">
+                                <div class="uk-margin">
+                                    <span align="left" class="uk-legend">Имя пользователя</span>
+                                    {{ form.username }}
+                                </div>
+
+                                <div class="uk-margin">
+                                    <span align="left" class="uk-legend">Пароль</span>
+                                    {{ form.password }}
+                                </div>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+                                <input class="uk-button uk-button-primary" type="submit" value="Войти">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                {% else %}
+                <div align="center" id="{{ item.punct_text }}" uk-modal>
+                    <form method="POST" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
+                        {% csrf_token %}
+                        <div class="uk-modal-header">
+                            <h2 class="uk-modal-title " align="center">Регистрация</h2>
+                        </div>
+                        <fieldset class="uk-fieldset">
+                            <div class="uk-modal-footer uk-text-left" align="center">
+                                <div class="uk-margin" align="center">
+                                    <span align="left" class="uk-legend">Имя пользователя</span><br>
+                                    {{ form1.username }}
+                                </div>
+
+                                <div class="uk-margin" align="center">
+                                    <span align="left" class="uk-legend">Придумайте пароль</span><br>
+                                    {{ form1.password1 }}
+                                </div>
+
+                                <ul align="center" class="uk-list" align="center">
+                                    <li>Пароль должен состоять минимум из 8 символов латинского алфавита, а также иметь символы разных регистров и цифры(у).</li>
+                                </ul>
+
+                                <div class="uk-margin" align="center">
+                                    <span align="left" class="uk-legend">Повторите пароль</span><br>
+                                    {{ form1.password2 }}
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            {{ form1.male }}
+                            {{ form1.female }}
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                           <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+                            <input class="uk-button uk-button-primary" type="submit" value="Зарегистрироваться">
+                        </div>
+
+                    </form>
+                </div>
+                {% endif %}
+                {% endif %}
                 {% endfor %}
             </li>
-    </div>
-</nav>
+        </div>
+    </nav>
 
 </div>

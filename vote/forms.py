@@ -30,8 +30,7 @@ class RegisterForm(forms.Form):
         required=True,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control uk-input',
-                'type': 'text',
+                'class': 'form-control',
                 'placeholder': 'Username'
             }
         )
@@ -42,8 +41,7 @@ class RegisterForm(forms.Form):
         required=True,
         widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control uk-input',
-                'type': 'password',
+                'class': 'form-control',
                 'placeholder': 'Password',
             }
         )
