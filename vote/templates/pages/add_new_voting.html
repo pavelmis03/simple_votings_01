@@ -40,40 +40,5 @@
 </form>
 
 
-<script>
-    'use strict';
 
-    //document.querySelectorAll('.uk-close').addEventListener
-    AddVoteP.addEventListener('click', function() {
-        let newP = document.createElement('div');
-        newP.classList.add('uk-flex');
-        let newI = document.createElement('input');
-        newI.classList.add('uk-input');
-        newI.setAttribute('type', 'text');
-        newI.setAttribute('style', 'margin-bottom:1.3em;margin-right:0.3em');
-        let newCl = document.createElement('a');
-        newCl.classList.add('uk-button');
-        newCl.classList.add('uk-button-default');
-        newCl.classList.add('uk-close');
-        newCl.classList.add('uk-height-1-1');
-        newCl.setAttribute('uk-close', '');
-        newCl.addEventListener('click', function(e) {
-            let a = e.target.parentNode;
-            a.innerHTML = "";
-            let d = Pols.childList;
-            for (i in d) {
-                if (i.innerHTML == "") {
-                    d.splice(i, 1);
-                }
-            }
-            Pols.childList = d;
-        });
-        newP.appendChild(newI);
-        newP.appendChild(newCl);
-
-        // Pols.insertAdjacentHTML("afterEnd", newP);
-        Pols.appendChild(newP);
-    });
-
-</script>
 {% endblock %}

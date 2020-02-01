@@ -12,10 +12,10 @@ def get_base_context(request, pagename=''):
     context = {'MenuMain': [], 'current_time': datetime.now(), 'MenuMainAnon': [], 'pagename': pagename}
 
     if request.user.is_anonymous:
-        context['MenuMainAnon'].append({'punct_link': '/login', 'punct_text': 'SingIn'})
+        context['MenuMainAnon'].append({'punct_link': '/login', 'punct_text': 'Войти'})
         context['MenuMainAnon'].append({'punct_link': '/registration', 'punct_text': 'Зарегистрироваться'})
     else:
-        context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'Создать vote'}]
+        context['MenuMain'] += [{'punct_link': '/add_new_voting', 'punct_text': 'vote'}]
         context['MenuMainAnon'] += [{'punct_link': '/profile', 'punct_text': 'Profile'}]
 
     return context
