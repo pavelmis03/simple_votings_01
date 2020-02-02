@@ -75,6 +75,7 @@ def registration_page(request):
 
 def change_password(request):
     context = get_base_context(request, '')
+    context['user'] = request.userпше
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
 
