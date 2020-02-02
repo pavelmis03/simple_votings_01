@@ -15,8 +15,7 @@ class Constants:
         ('R', 'rejected'),
         ('A', 'accepted'),
     )
-    POSTS_TITLE_SIZE = 100
-    POSTS_DESC_SIZE = 500
+    POSTS_TEXT_SIZE = 200
     ANSWERS_TEXT_SIZE = 500
 
 
@@ -34,8 +33,7 @@ class Posts(models.Model):
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     # only one - true, several choices - false
     type = models.BooleanField()
-    title = models.CharField(max_length=Constants.POSTS_TITLE_SIZE)
-    description = models.CharField(max_length=Constants.POSTS_DESC_SIZE)
+    text = models.CharField(max_length=Constants.POSTS_TEXT_SIZE)
     created_at = models.DateTimeField()
 
 
