@@ -1,7 +1,7 @@
 {% extends "base_templates/base.html" %}
 
 {% block content %}
-<form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top">
+<form action="add_new_voting/" method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top">
     {% csrf_token %}
     <br class="uk-fieldset">
     <div class="uk-card-header">

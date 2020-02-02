@@ -14,7 +14,7 @@
                     <!--                    <button class="uk-button uk-button-light" type="button" uk-toggle="target: #{{ item.punct_text }}"></button>-->
                     <button class="uk-button uk-button-light uk-margin-small-right" type="button" uk-toggle="target: #{{ item.punct_text }}">Создать vote</button>
                     <div align="center" id="{{ item.punct_text }}" uk-modal>
-                        <form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
+                        <form action="add_new_voting/" method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
                             {% csrf_token %}
                             <br class="uk-fieldset">
                             <div class="uk-modal-header">
