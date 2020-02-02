@@ -4,8 +4,10 @@ from django.contrib import messages, auth
 from django.contrib.auth import *
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import render, redirect
+from django.utils import timezone
 
 from vote.forms import LoginForm
+from vote.models import Post, Answer
 
 
 def get_base_context(request, pagename=''):
@@ -23,9 +25,23 @@ def get_base_context(request, pagename=''):
 
 def add_new_voting(request):
     context = get_base_context(request, '')
-    post = request.POST
-    if post:
-        print(post)
+    data = request.POST
+    if data:
+        print(data)
+        # saving post
+        post = Post(
+            author = request.user,
+            type = 'type' in data['text'],
+            text = data['text'] if 'text' in data.keys() else '',
+            created_at = datetime.now(tz=timezone.utc)
+        )
+        post.save()
+        for i in [_ for _ in data.keys() if 'var' in _]:
+            answer = Answer(
+                post = post,
+                text = data[i]
+            )
+            answer.save()
     return redirect('/')
 
 
