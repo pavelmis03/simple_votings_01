@@ -26,7 +26,7 @@
                                 
                                     <div class="uk-margin">
                                         <span class="uk-legend uk-text-middle">Ваш вопрос</span>
-                                        <input class="uk-input" type="text" placeholder="...">
+                                        <input class="uk-input" type="text" name="text" placeholder="...">
                                     </div>
 
                                     <div class="uk-margin">
@@ -36,7 +36,7 @@
 
                                     </div>
 
-                                    <input type="checkbox" class="uk-checkbox"> Много вариантный режим<br>
+                                    <input type="checkbox" name="type" class="uk-checkbox"> Много вариантный режим<br>
                                 
                                 </div>
                                 <div class="uk-modal-footer uk-text-right">
@@ -139,7 +139,7 @@
     </nav>
     <script>
         'use strict';
-
+        let val_c = 0;
         //document.querySelectorAll('.uk-close').addEventListener
         AddVoteP.addEventListener('click', function() {
             let newP = document.createElement('div');
@@ -147,6 +147,8 @@
             let newI = document.createElement('input');
             newI.classList.add('uk-input');
             newI.setAttribute('type', 'text');
+            newI.setAttribute('name', 'var' + String(val_c));
+            val_c += 1;
             newI.setAttribute('style', 'margin-bottom:1.3em;margin-right:0.3em');
             let newCl = document.createElement('a');
             newCl.classList.add('uk-button');
@@ -156,14 +158,19 @@
             newCl.setAttribute('uk-close', '');
             newCl.addEventListener('click', function(e) {
                 let a = e.target.parentNode;
+                val_c -= 1; 
                 a.innerHTML = "";
-                let d = Pols.childList;
-                for (i in d) {
-                    if (i.innerHTML == "") {
-                        d.splice(i, 1);
+                let d = Pols.children;
+                let j = 0;
+                console.log(d)
+                for (let i in d) {
+                    console.log(i);
+                    if (i.childElementCount != null) {
+                        i.children[0].setAttribute("name", "var" + String(j));
+                        j += 1;
                     }
                 }
-                Pols.childList = d;
+                Pols.children = d;
             });
             newP.appendChild(newI);
             newP.appendChild(newCl);
