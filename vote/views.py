@@ -23,7 +23,10 @@ def get_base_context(request, pagename=''):
 
 def add_new_voting(request):
     context = get_base_context(request, '')
-    return render(request, 'pages/add_new_voting.html', context)
+    post = request.POST
+    if post:
+        print(post)
+    return redirect('/')
 
 
 def votes(request):

@@ -19,7 +19,7 @@ class Constants:
     ANSWERS_TEXT_SIZE = 500
 
 
-class Complaints(models.Model):
+class Complaint(models.Model):
     # ЖАЛОБЫ
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=Constants.COMPLAINTS_STATUS)
@@ -28,7 +28,7 @@ class Complaints(models.Model):
     created_at = models.DateTimeField()
 
 
-class Posts(models.Model):
+class Post(models.Model):
     # ПОСТЫ
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     # only one - true, several choices - false
@@ -37,13 +37,13 @@ class Posts(models.Model):
     created_at = models.DateTimeField()
 
 
-class Answers(models.Model):
+class Answer(models.Model):
     # ВОЗМОЖНЫЕ ОТВЕТЫ
-    post = models.ForeignKey(Posts, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.CharField(max_length=Constants.ANSWERS_TEXT_SIZE)
 
-class Votes(models.Model):
+class Vote(models.Model):
     # ГОЛОСА
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answers, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     date = models.DateTimeField()
