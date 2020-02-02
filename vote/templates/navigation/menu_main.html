@@ -58,7 +58,6 @@
                 {% for item in MenuMainAnon %}
                 {% if item.punct_link == '/profile' %}
                 <button class="uk-button uk-button-primary">{{ item.punct_text }}</button>
-
                 {% include "navigation/profile.html" %}
                 {% else %}
                 <button class="uk-button uk-button-primary" uk-toggle="target: #{{ item.punct_text }}">{{ item.punct_text }}</button>
