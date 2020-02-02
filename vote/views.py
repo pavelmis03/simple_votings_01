@@ -27,8 +27,6 @@ def add_new_voting(request):
     context = get_base_context(request, '')
     data = request.POST
     if data:
-        print(data)
-        # saving post
         post = Post(
             author = request.user,
             type = 'type' in data['text'],
@@ -82,6 +80,10 @@ def index_page(request):
                 messages.add_message(request, messages.ERROR, 'переданные данные не корректны!')
                 return redirect('/')
 
+    posts = Post.objects.all()
+    context['posts'] = posts
+    answers = Answer.objects.all()
+    context['answers'] = answers
     return render(request, 'pages/index.html', context)
 
 

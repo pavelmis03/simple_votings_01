@@ -2,5 +2,20 @@
 
 {% block content %}
 
-<p>Добро пожаловать на главную страницу проекта
+<p>Добро пожаловать на главную страницу проекта</p>
+
+{% for post in posts %}
+<p>{{ post.text }}</p>
+<i>Варианты ответа: </i>
+<li>
+    {% for answer in answers %}
+        {% if answer.post == post %}
+            <lo>{{ answer.text }};</lo>
+        {% endif %}
+    {% endfor %}
+</li>
+<hr>
+{% endfor %}
+
+<p>
 {% endblock %}
