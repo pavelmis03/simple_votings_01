@@ -77,6 +77,7 @@ def index_page(request):
     context['main_header'] = context['title'] = 'Simple votings'
     context['form'] = LoginForm()
     context['form1'] = UserCreationForm()
+
     if request.POST:
         register_form = UserCreationForm(request.POST)
         loginform = LoginForm(request.POST)
@@ -108,6 +109,7 @@ def index_page(request):
     context['posts'] = posts
     answers = Answer.objects.all()
     context['answers'] = answers
+
     return render(request, 'pages/index.html', context)
 
 
@@ -185,6 +187,7 @@ def vote_post(request):
                     vot.save()
                     return redirect('/')
                 else:
+                    print('Denied for multiple voting')
                     messages.add_message(request, messages.ERROR, "Нельзя голосовать за один опрос более одного раза!")
                 return redirect('/')
     return redirect('/')

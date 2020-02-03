@@ -14,7 +14,9 @@
         {% endfor %}
 
         <div class="uk-modal-footer uk-text-right">
-            <input class="uk-button uk-button-danger uk-margin-small-right" id="{{ vote.id }}" align="right" type="submit" style="margin-bottom:1.3em;" onclick="Del({{ vote.id }})" value="Удалить">
+            <div class="uk-button uk-button-danger uk-margin-small-right" id="{{ vote.id }}" align="right" type="submit" style="margin-bottom:1.3em;" onclick="Del({{ vote.id }})" value="Удалить">
+                Удалить
+            </div>
         </div>
     </div>
     <script>
@@ -24,10 +26,9 @@
             xhr.send();
             xhr.onreadystatechange = function() { // (3)
                 if (xhr.readyState == 4 && xhr.status != 200) {
-                } else {
-                    alert('Error #ERC');
-                }
 
+                }
+                window.location = window.location;
             }
         }
 

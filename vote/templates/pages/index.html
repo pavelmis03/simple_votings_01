@@ -14,8 +14,10 @@
         {% for answer in answers %}
         <div class="uk-flex uk-flex-center" style="margin-bottom:1em">
             {% if answer.post == post %}
-            <input type="submit" class="uk-button uk-button-default k-flex uk-flex-center" onclick="Vot({{ answer.id }})" value = "{{ answer.text }}">
-        {% endif %}
+            <div  class="uk-button uk-button-default k-flex uk-flex-center" onclick="Vot({{ answer.id }})">
+                {{ answer.text }}
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -31,10 +33,9 @@
             xhr.send();
             xhr.onreadystatechange = function() { // (3)
                 if (xhr.readyState == 4 && xhr.status != 200) {
-                } else {
-                    alert('Error #VOT');
-                }
 
+                }
+                window.location = window.location;
             }
         }
 
