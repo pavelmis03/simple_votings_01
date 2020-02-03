@@ -14,8 +14,8 @@
         {% for answer in answers %}
         <div class="uk-flex uk-flex-center" style="margin-bottom:1em">
             {% if answer.post == post %}
-            <input type="submit" class="uk-button uk-button-default k-flex uk-flex-center" onclick="" value = {{ answer.text }}>
-            {% endif %}
+            <input type="submit" class="uk-button uk-button-default k-flex uk-flex-center" onclick="Vot({{ answer.id }})" value = "{{ answer.text }}">
+        {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -24,6 +24,21 @@
         <img src="../../../static/icons/32x32/like.png">
         <span class="uk-badge" > 0</span>
     </div>
+    <script>
+        function Vot(e) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/vot?id=' + e, true);
+            xhr.send();
+            xhr.onreadystatechange = function() { // (3)
+                if (xhr.readyState == 4 && xhr.status != 200) {
+                } else {
+                    alert('Error #VOT');
+                }
+
+            }
+        }
+
+    </script>
 </form>
 {% endfor %}
 {% endblock %}

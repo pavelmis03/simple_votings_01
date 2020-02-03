@@ -2,7 +2,7 @@
     {% csrf_token %}
     <br class="uk-fieldset">
     <div class="uk-card-header">
-        <legend class="uk-legend uk-text-middle uk-flex uk-flex-center" >{{ vote.text}}</legend>
+        <legend class="uk-legend uk-text-middle uk-flex uk-flex-center">{{ vote.text}}</legend>
     </div>
 
     <div class="uk-card-body">
@@ -14,8 +14,22 @@
         {% endfor %}
 
         <div class="uk-modal-footer uk-text-right">
-            <input class="uk-button uk-button-danger uk-margin-small-right"  id="del{{ vote.id }}" align="right" type="submit" style="margin-bottom:1.3em;" value="Удалить">
+            <input class="uk-button uk-button-danger uk-margin-small-right" id="{{ vote.id }}" align="right" type="submit" style="margin-bottom:1.3em;" onclick="Del({{ vote.id }})" value="Удалить">
         </div>
     </div>
+    <script>
+        function Del(e) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/erc?id=' + e, true);
+            xhr.send();
+            xhr.onreadystatechange = function() { // (3)
+                if (xhr.readyState == 4 && xhr.status != 200) {
+                } else {
+                    alert('Error #ERC');
+                }
 
+            }
+        }
+
+    </script>
 </form>

@@ -4,6 +4,7 @@ from django.contrib import messages, auth
 from django.contrib.auth import *
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
@@ -34,7 +35,6 @@ def add_new_voting(request):
             text=data['text'] if 'text' in data.keys() else '',
             created_at=datetime.now(tz=timezone.utc)
         )
-        print(data)
         post.save()
         if len([_ for _ in data.keys() if 'choice' in _]) <= 1:
             messages.add_message(request, messages.ERROR, "Нельзя создать голосование с одним вариантом ответа! \
@@ -53,8 +53,6 @@ def votes(request):
     context = get_base_context(request, '')
     context['vote_info'] = []
     if request.method == "POST":
-        print(request.POST)
-        print()
         return redirect('votes')
     for post in Post.objects.all():
         if post.author == request.user:
@@ -103,7 +101,7 @@ def index_page(request):
                     messages.add_message(request, messages.SUCCESS, "Вы успешно вошли!")
                     return redirect('/')
             else:
-                messages.add_message(request, messages.ERROR, 'переданные данные не корректны!')
+                messages.add_message(request, messages.ERROR, 'Переданные данные не корректны!')
                 return redirect('/')
 
     posts = Post.objects.all()
@@ -155,3 +153,38 @@ def error_404(request, ex):
 
 def error_500(request):
     return render(request, 'error_pages/error_500.html', {})
+
+
+def del_post(request):
+    print("DELPOST")
+    if request.GET:
+        get_id = request.GET['id']
+        for post in Post.objects.all():
+            if str(post.id) == str(get_id):
+                post.delete()
+                return redirect('votes')
+        messages.add_message(request, messages.ERROR, "ERROR!")
+    messages.add_message(request, messages.ERROR, "ERROR!")
+    return redirect('votes')
+
+
+def vote_post(request):
+    if request.GET:
+        get_id = request.GET['id']
+        for ans in Answer.objects.all():
+            if str(ans.id) == str(get_id):
+                if request.user.id not in ans.voters and ans.post.type:
+                    ans.voters += [request.user.id]
+                    ans.voters_cnt += 1
+                    print(ans.voters, request.user.id)
+                    vot = Vote(
+                        author=request.user,
+                        answer=ans,
+                        date=datetime.now(tz=timezone.utc)
+                    )
+                    vot.save()
+                    return redirect('/')
+                else:
+                    messages.add_message(request, messages.ERROR, "Нельзя голосовать за один опрос более одного раза!")
+                return redirect('/')
+    return redirect('/')

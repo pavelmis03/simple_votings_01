@@ -28,6 +28,8 @@ urlpatterns = [
     path('add_new_voting/', views.add_new_voting, name='add_new_voting'),
     path('votes/', views.votes, name='votes'),
     path('logout/', views.logout, name='logout'),
+    path('erc/', views.del_post, name='erc'),
+    path('vot/', views.vote_post, name='vot'),
 ]
 
 
