@@ -54,6 +54,7 @@ def votes(request):
     context['vote_info'] = []
     if request.method == "POST":
         print(request.POST)
+        print()
         return redirect('votes')
     for post in Post.objects.all():
         if post.author == request.user:

@@ -47,3 +47,13 @@ class RegisterForm(forms.Form):
         )
     )
 
+
+class PostForm(forms.Form):
+    Title = forms.CharField(
+        max_length=20,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control uk-legend uk-text-middle uk-flex uk-flex-center'
+            }
+        )
+    )

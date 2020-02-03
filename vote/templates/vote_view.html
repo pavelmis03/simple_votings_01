@@ -14,18 +14,7 @@
         {% endfor %}
 
         <div class="uk-modal-footer uk-text-right">
-            <button class="uk-button uk-button-danger uk-margin-small-right"  align="right" type="button" uk-toggle="target: #modal-example" style="margin-bottom:1.3em;">Удалить</button>
-
-            <div id="modal-example" uk-modal>
-                <div class="uk-modal-dialog uk-modal-body uk-modal-danger">
-                    <h2 class="uk-modal-title">Удалить ваше голосование?</h2>
-                    <p>При нажатии на кнопку "ТОЧНО УДАЛИТЬ" ваше голосование будет удалено с сайта без возможности восстановления!</p>
-                    <p class="uk-text-right">
-                        <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
-                        <button class="uk-button uk-button-danger" type="submit" id="del{{ vote.id }}">Точно удалить</button>
-                    </p>
-                </div>
-            </div>
+            <input class="uk-button uk-button-danger uk-margin-small-right"  id="del{{ vote.id }}" align="right" type="submit" style="margin-bottom:1.3em;" value="Удалить">
         </div>
     </div>
 

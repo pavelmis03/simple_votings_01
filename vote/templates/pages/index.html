@@ -2,20 +2,28 @@
 
 {% block content %}
 
-<p>Добро пожаловать на главную страницу проекта</p>
-
 {% for post in posts %}
-<p>{{ post.text }}</p>
-<i>Варианты ответа: </i>
-<li>
-    {% for answer in answers %}
-        {% if answer.post == post %}
-            <lo>{{ answer.text }};</lo>
-        {% endif %}
-    {% endfor %}
-</li>
-<hr>
-{% endfor %}
+<form method="post" class = "uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-left">
+    {% csrf_token %}
 
-<p>
+    <div class="uk-card-header">
+        <legend class="uk-legend uk-text-middle uk-flex uk-flex-center" >{{ post.text}}</legend>
+    </div>
+
+    <div class="uk-card-body uk-margin-small-right">
+        {% for answer in answers %}
+        <div class="uk-flex uk-flex-center" style="margin-bottom:1em">
+            {% if answer.post == post %}
+            <input type="submit" class="uk-button uk-button-default k-flex uk-flex-center" onclick="" value = {{ answer.text }}>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="uk-card-footer uk-flex uk-flex-center">
+        <img src="../../../static/icons/32x32/like.png">
+        <span class="uk-badge" > 0</span>
+    </div>
+</form>
+{% endfor %}
 {% endblock %}
