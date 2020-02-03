@@ -1,34 +1,34 @@
-{% extends "base_templates/base.html" %}
 
-{% block content %}
-<form action="add_new_voting/" method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top">
-    {% csrf_token %}
-    <br class="uk-fieldset">
-    <div class="uk-card-header">
-        <legend align="center">Создайте ваш vote</legend>
-    </div>
+                        <form action="add_new_voting/" method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
+                            {% csrf_token %}
+                            <br class="uk-fieldset">
+                            <div class="uk-modal-header">
+                                
+                                   <h2> <legend align="center">Создайте ваш опрос</legend></h2>
+                                
+                            </div>
+                            <div class="uk-modal-body">
+                                
+                                    <div align="left"class="uk-margin">
+                                        <span class="uk-legend uk-text-middle">Заголовок опроса</span>
+                                        <input class="uk-input" type="text" name="text" placeholder="" required="true">
+                                    </div>
 
-    <div class="uk-card-body">
-        <div class="uk-margin">
-            <span class="uk-legend uk-text-middle">Ваш вопрос</span>
-            <input name="text" class="uk-input" type="text" placeholder="...">
-        </div>
+                                    <div align="left" class="uk-margin">
+                                        <span class="uk-legend uk-text-middle">Введите варианты ответа</span>
+                                        <div class="" id="Pols"> </div>
+                                        <div class="uk-button uk-button-default" id="AddVoteP">Добавить пункт</div>
 
-        <div class="uk-margin">
-            <span class="uk-legend uk-text-middle">Введите варианты ответа</span>
-            <div class="" id="Pols">
-               
-            </div>
-            <div class="uk-button uk-button-default" id="AddVoteP">Добавить пункт</div>
+                                    </div>
 
-        </div>
+                                    <div align="left">
+                                        <input type="checkbox" name="type" class="uk-checkbox" align="left" > Много вариантный режим<br>
+                                    </div>
 
-        <input name="type" value="0" type="checkbox" class="uk-checkbox"> Много вариантный режим<br>
-
-        <input class="uk-button uk-button-primary" type="submit" value="Опубликовать vote" style="margin-top:2em">
-    </div>
-</form>
-
-
-
-{% endblock %}
+                                </div>
+                                <div class="uk-modal-footer uk-text-right">
+                                    <button class="uk-button uk-button-default uk-modal-close" type="button" >Отмена</button>
+                                    <input class="uk-button uk-button-primary" type="submit" value="Опубликовать vote">
+                                </div>
+                            
+                        </form>

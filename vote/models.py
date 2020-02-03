@@ -35,12 +35,17 @@ class Post(models.Model):
     type = models.BooleanField()
     text = models.CharField(max_length=Constants.POSTS_TEXT_SIZE)
     created_at = models.DateTimeField()
+    choices = list()
+    all_voters_cnt = 0
 
 
 class Answer(models.Model):
     # ВОЗМОЖНЫЕ ОТВЕТЫ
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.CharField(max_length=Constants.ANSWERS_TEXT_SIZE)
+    voters = list()
+    voters_cnt = len(voters)
+
 
 class Vote(models.Model):
     # ГОЛОСА

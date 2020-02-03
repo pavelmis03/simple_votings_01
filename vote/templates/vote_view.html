@@ -1,28 +1,32 @@
-<form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top">
+<form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-2-2@m uk-animation-slide-top" style="margin-bottom: 2em">
     {% csrf_token %}
     <br class="uk-fieldset">
     <div class="uk-card-header">
-        <legend class="uk-legend uk-text-middle uk-flex uk-flex-center" >The topic for voting</legend>
+        <legend class="uk-legend uk-text-middle uk-flex uk-flex-center" >{{ vote.text}}</legend>
     </div>
 
     <div class="uk-card-body">
-        <div class="uk-flex">
-            <button class="uk-button uk-button-default uk-width-1-1" type="button" style="margin-bottom:1.3em;">Variant1</button>
+        {% for choice in vote.choices %}
+        <div class="">
+            <legend class="uk-button uk-button-primary uk-button-small" style="margin-bottom:1em">{{ choice.text }}: {{ choice.voters_cnt }}</legend>
+            <progress class="uk-progress" value="50" max="100" style="margin-bottom:1em"></progress>
         </div>
+        {% endfor %}
 
-        <div class="uk-flex">
-            <button class="uk-button uk-button-default uk-width-1-1" type="button" style="margin-bottom:1.3em;">Variant2</button>
-        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-danger uk-margin-small-right"  align="right" type="button" uk-toggle="target: #modal-example" style="margin-bottom:1.3em;">Удалить</button>
 
-        <div class="uk-flex">
-            <button class="uk-button uk-button-default uk-width-1-1" type="button" style="margin-bottom:1.3em;">Variant3</button>
-        </div>
-
-        <div class="uk-flex uk-flex-right">
-            <button class="uk-button uk-button-default uk-flex-right" align="right"type="button" style="margin-bottom:1.3em;">Like</button>
+            <div id="modal-example" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-modal-danger">
+                    <h2 class="uk-modal-title">Удалить ваше голосование?</h2>
+                    <p>При нажатии на кнопку "ТОЧНО УДАЛИТЬ" ваше голосование будет удалено с сайта без возможности восстановления!</p>
+                    <p class="uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+                        <button class="uk-button uk-button-danger" type="submit" id="del{{ vote.id }}">Точно удалить</button>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-
-    
 
 </form>
