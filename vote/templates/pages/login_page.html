@@ -1,5 +1,29 @@
-{% extends "base_templates/base.html" %}
+<div align="center" id="{{ item.punct_text }}" uk-modal>
+                    <form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
+                        {% csrf_token %}
+                        <div class="uk-card-header">
+                            <!--                            <button class="uk-modal-close-default" align="rigth" type="button" uk-close></button>-->
+                            <div class="container uk-crad-header">
+                                <h2 align="center">Вход</h2>
+                            </div>
+                        </div>
+                        <fieldset class="uk-fieldset">
 
-{% block content %}
+                            <div class="uk-modal-footer uk-text-left">
+                                <div class="uk-margin">
+                                    <span align="left" class="uk-legend">Никнейм пользователя</span>
+                                    {{ form.username }}
+                                </div>
 
-{% endblock %}
+                                <div class="uk-margin">
+                                    <span align="left" class="uk-legend">Пароль</span>
+                                    {{ form.password }}
+                                </div>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+                                <input class="uk-button uk-button-primary" type="submit" value="Войти">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>

@@ -14,38 +14,7 @@
                     <!--                    <button class="uk-button uk-button-light" type="button" uk-toggle="target: #{{ item.punct_text }}"></button>-->
                     <button class="uk-button uk-button-light uk-margin-small-right" type="button" uk-toggle="target: #{{ item.punct_text }}">Создать vote</button>
                     <div align="center" id="{{ item.punct_text }}" uk-modal>
-                        <form action="add_new_voting/" method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
-                            {% csrf_token %}
-                            <br class="uk-fieldset">
-                            <div class="uk-modal-header">
-                                
-                                   <h2> <legend align="center">Создайте ваш vote</legend></h2>
-                                
-                            </div>
-                            <div class="uk-modal-body">
-                                
-                                    <div class="uk-margin">
-                                        <span class="uk-legend uk-text-middle">Ваш вопрос</span>
-                                        <input class="uk-input" type="text" name="text" placeholder="...">
-                                    </div>
-
-                                    <div class="uk-margin">
-                                        <span class="uk-legend uk-text-middle">Введите варианты ответа</span>
-                                        <div class="" id="Pols"> </div>
-                                        <div class="uk-button uk-button-default" id="AddVoteP">Добавить пункт</div>
-
-                                    </div>
-
-                                    <input type="checkbox" name="type" class="uk-checkbox"> Много вариантный режим<br>
-                                
-                                </div>
-                                <div class="uk-modal-footer uk-text-right">
-                                    <button class="uk-button uk-button-default uk-modal-close" type="button" >Отмена</button>
-                                    <input class="uk-button uk-button-primary" type="submit" value="Опубликовать vote">
-                                </div>
-                            
-                        </form>
-
+                    {% include "pages/add_new_voting.html" %}
                     </div>
                     {% endfor %}
                 </li>
@@ -62,75 +31,10 @@
                 {% else %}
                 <button class="uk-button uk-button-primary" uk-toggle="target: #{{ item.punct_text }}">{{ item.punct_text }}</button>
                 {% if item.punct_text == 'Войти' %}
-                <div align="center" id="{{ item.punct_text }}" uk-modal>
-                    <form method="post" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
-                        {% csrf_token %}
-                        <div class="uk-card-header">
-                            <!--                            <button class="uk-modal-close-default" align="rigth" type="button" uk-close></button>-->
-                            <div class="container uk-crad-header">
-                                <h2 align="center">Войти</h2>
-                            </div>
-                        </div>
-                        <fieldset class="uk-fieldset">
-
-                            <div class="uk-modal-footer uk-text-left">
-                                <div class="uk-margin">
-                                    <span align="left" class="uk-legend">Имя пользователя</span>
-                                    {{ form.username }}
-                                </div>
-
-                                <div class="uk-margin">
-                                    <span align="left" class="uk-legend">Пароль</span>
-                                    {{ form.password }}
-                                </div>
-                            </div>
-                            <div class="uk-modal-footer uk-text-right">
-                                <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
-                                <input class="uk-button uk-button-primary" type="submit" value="Войти">
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-                {% else %}
-                <div align="center" id="{{ item.punct_text }}" uk-modal>
-                    <form method="POST" class="uk-card uk-card-default uk-dark uk-card-hover uk-card-body uk-width-1-2@m uk-animation-slide-top">
-                        {% csrf_token %}
-                        <div class="uk-modal-header">
-                            <h2 class="uk-modal-title " align="center">Регистрация</h2>
-                        </div>
-                        <fieldset class="uk-fieldset">
-                            <div class="uk-modal-footer uk-text-left" align="center">
-                                <div class="uk-margin" align="center">
-                                    <span align="left" class="uk-legend">Имя пользователя</span><br>
-                                    {{ form1.username }}
-                                </div>
-
-                                <div class="uk-margin" align="center">
-                                    <span align="left" class="uk-legend">Придумайте пароль</span><br>
-                                    {{ form1.password1 }}
-                                </div>
-
-                                <ul align="center" class="uk-list" align="center">
-                                    <li>Пароль должен состоять минимум из 8 символов латинского алфавита, а также иметь символы разных регистров и цифры(у).</li>
-                                </ul>
-
-                                <div class="uk-margin" align="center">
-                                    <span align="left" class="uk-legend">Повторите пароль</span><br>
-                                    {{ form1.password2 }}
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                            {{ form1.male }}
-                            {{ form1.female }}
-                        </div>
-                        <div class="uk-modal-footer uk-text-right">
-                            <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
-                            <input class="uk-button uk-button-primary" type="submit" value="Зарегистрироваться">
-                        </div>
-
-                    </form>
-                </div>
+                {% include "pages/login_page.html" %}
+                {% endif %}
+                {% if item.punct_text == 'Зарегистрироваться' %}
+                {% include "pages/registration_page.html" %}
                 {% endif %}
                 {% endif %}
                 {% endfor %}
@@ -147,7 +51,8 @@
             let newI = document.createElement('input');
             newI.classList.add('uk-input');
             newI.setAttribute('type', 'text');
-            newI.setAttribute('name', 'var' + String(val_c));
+            newI.setAttribute('required', 'true');
+            newI.setAttribute('name', 'choice' + String(val_c));
             val_c += 1;
             newI.setAttribute('style', 'margin-bottom:1.3em;margin-right:0.3em');
             let newCl = document.createElement('a');
@@ -166,7 +71,7 @@
                 for (let i in d) {
                     console.log(i);
                     if (i.childElementCount != null) {
-                        i.children[0].setAttribute("name", "var" + String(j));
+                        i.children[0].setAttribute("name", "choice" + String(j));
                         j += 1;
                     }
                 }

@@ -3,11 +3,12 @@ from datetime import datetime
 from django.contrib import messages, auth
 from django.contrib.auth import *
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from vote.forms import LoginForm
-from vote.models import Post, Answer
+from vote.models import Post, Answer, Vote
 
 
 def get_base_context(request, pagename=''):
@@ -30,23 +31,45 @@ def add_new_voting(request):
         print(data)
         # saving post
         post = Post(
-            author = request.user,
-            type = 'type' in data['text'],
-            text = data['text'] if 'text' in data.keys() else '',
-            created_at = datetime.now(tz=timezone.utc)
+            author=request.user,
+            type='type' in data['text'],
+            text=data['text'] if 'text' in data.keys() else '',
+            created_at=datetime.now(tz=timezone.utc)
         )
+        print(data)
         post.save()
-        for i in [_ for _ in data.keys() if 'var' in _]:
-            answer = Answer(
-                post = post,
-                text = data[i]
-            )
-            answer.save()
+        if len([_ for _ in data.keys() if 'choice' in _]) <= 1:
+            messages.add_message(request, messages.ERROR, "Нельзя создать голосование с одним вариантом ответа! \
+            Голосование не создано!")
+        else:
+            for i in [_ for _ in data.keys() if 'choice' in _]:
+                answer = Answer(
+                    post=post,
+                    text=data[i]
+                )
+                answer.save()
     return redirect('/')
 
 
 def votes(request):
     context = get_base_context(request, '')
+    context['vote_info'] = []
+    for post in Post.objects.all():
+        if post.author == request.user:
+            post.choices = []
+            post.all_voters_cnt = 0
+            for choice in Answer.objects.all():
+                if choice.post == post:
+                    choice.voters = []
+                    post.choices.append(choice)
+                    for vot in Vote.objects.all():
+                        if vot.answer == choice:
+                            choice.voters.append(vot)
+                    choice.voters_cnt = len(choice.voters)
+                    post.all_voters_cnt += choice.voters_cnt
+
+            print(i.text for i in post.choices)
+            context['vote_info'].append(post)
     return render(request, 'pages/votes.html', context)
 
 
@@ -88,13 +111,13 @@ def index_page(request):
 def login_page(request):
     pass
 
+
 def registration_page(request):
     pass
 
 
-def change_password(request):
+def change_profile(request):
     context = get_base_context(request, '')
-    context['user'] = request.userпше
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
 
@@ -108,7 +131,7 @@ def change_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
         context['form'] = form
-    return render(request, 'pages/change_password.html', context)
+    return render(request, 'pages/change_profile.html', context)
 
 
 def logout(request):

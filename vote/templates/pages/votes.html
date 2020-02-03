@@ -1,9 +1,9 @@
 {% extends "base_templates/base.html" %}
 
 {% block content %}
-{% include "../vote_view.html" %}
-<div style="margin-bottom: 2em"></div>
-{% include "../vote_view.html" %}
-<div style="margin-bottom: 2em"></div>
-{% include "../vote_view.html" %}
+
+{% for vote in vote_info %}
+    {% include "../vote_view.html" %}
+{% endfor %}
+
 {% endblock %}
